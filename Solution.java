@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Currency;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -115,7 +114,7 @@ class Solution {
         return ans;
     }
 
-    public int trap(int[] height){
+    public int trap(int[] height) {
         int ans = 0;
         int left = 0;
         int right = height.length - 1;
@@ -126,11 +125,43 @@ class Solution {
             rightMax = Math.max(rightMax, height[right]);
             if (leftMax < rightMax) {
                 ans += leftMax - height[left++];
-            }else{
+            } else {
                 ans += rightMax - height[right--];
             }
         }
         return ans;
     }
 
+    public int lenthOfLongestSubsting(String s) {
+        char[] chars = s.toCharArray();
+        Set<Character> set = new HashSet<>();
+        int left = 0;
+        int ans = 0;
+        for (int right = 0; right < chars.length; right++) {
+            while (set.contains(chars[right])) {
+                set.remove(chars[left]);
+                left++;
+            }
+            set.add(chars[right]);
+            ans = Math.max(ans, right - left + 1);
+        }
+        return ans;
+    }
+
+    // 下面的better，因为left直接跳转了
+    public int lengthOfLongestSubstring(String s) {
+        Map<Character, Integer> map = new HashMap<>();
+        int left = 0, ans = 0;
+
+        for (int right = 0; right < s.length(); right++) {
+            char c = s.charAt(right);
+            if (map.containsKey(c)) {
+                left = Math.max(left, map.get(c) + 1);
+            }
+            map.put(c, right);
+            ans = Math.max(ans, right - left + 1);
+        }
+        return ans;
+    }
+    
 }

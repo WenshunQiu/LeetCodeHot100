@@ -24,7 +24,6 @@ int main()
     for (int i = 0; i < n; i++)
     {
         stack[++top] = in[i];
-
         while (top >= 0 && j < n && stack[top] == out[j])
         {
             top--;

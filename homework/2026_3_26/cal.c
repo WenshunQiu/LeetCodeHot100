@@ -78,7 +78,7 @@ int fcal(char *exp)
         if (isdigit(exp[i]))
         {
             int num = 0;
-            while (i < len && isdigit(exp[i]))
+            while (i < len && isdigit(exp[i])) // 从字符串数字转为普通数字，需要从最高位读取，所以需要x10
             {
                 num = num * 10 + (exp[i] - '0');
                 i++;
@@ -106,7 +106,7 @@ int fcal(char *exp)
         }
         else if (exp[i] == '+' || exp[i] == '-' || exp[i] == '*' || exp[i] == '/' || exp[i] == '%')
         {
-            while (opTop != -1 && getPriority(peekOp()) >= getPriority(exp[i]))
+            while (opTop != -1 && getPriority(peekOp()) >= getPriority(exp[i]))//如果栈内的优先级大于当前的优先级，则计算栈内的
             {
                 char op = popOp();
                 int b = popNum();

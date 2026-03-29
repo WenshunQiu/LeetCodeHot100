@@ -24,10 +24,10 @@ int findFunc(char *name)
     {
         if (strcmp(funcList[i].name, name) == 0)
         {
-            return i;
+            return i; // 如果存在，就返回索引
         }
     }
-
+    // 如果不存在，就创建一个
     strcpy(funcList[funcNum].name, name);
     funcList[funcNum].count = 0;
     funcList[funcNum].exist = 0;

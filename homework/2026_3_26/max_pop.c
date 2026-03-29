@@ -20,7 +20,7 @@ int main()
     {
         scanf("%d", &out[i]);
     }
-    
+
     for (int i = 0; i < n; i++)
     {
         stack[++top] = in[i];

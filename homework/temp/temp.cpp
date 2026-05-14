@@ -3,6 +3,7 @@
 #include <sstream>
 #include <vector>
 #include <queue>
+#include <stack>
 using namespace std;
 struct TreeNode
 {
@@ -69,3 +70,45 @@ string serialize_BFS(TreeNode *root)
 
     return ans;
 }
+
+class solution{
+    private:
+    vector<int> res;
+    public:
+    vector<int> inorder(TreeNode *root ){
+        res.clear();
+        stack<TreeNode *> stk;
+        if (root == nullptr)
+        {
+            return vector<int>();
+        }
+        stk.push(root);
+        while (!stk.empty())
+        {
+            TreeNode *cur = stk.top();
+            stk.pop();
+            if (cur != nullptr)
+            {
+                if (cur->right != nullptr)
+                {
+                    stk.push(cur->right);
+                }
+                stk.push(cur);
+                stk.push(nullptr);
+                if (cur->left != nullptr)
+                {
+                    stk.push(cur->left);
+                }
+            }else{
+                TreeNode* cur = stk.top();
+                res.push_back(cur->val);
+                stk.pop();
+            }
+            
+        }
+        return res;
+        
+        
+
+    }
+};

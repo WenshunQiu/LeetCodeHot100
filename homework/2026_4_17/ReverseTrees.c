@@ -26,7 +26,7 @@ int isNullToken(const char *s)
 
 void normalizeInput(char *line)
 {
-    for (int i = 0; line[i]; i++)
+    for (int i = 0; line[i]; i++)//很好用，只要不是0就可以一直运行下去
     {
         if (line[i] == '[' || line[i] == ']' || line[i] == ',')
         {

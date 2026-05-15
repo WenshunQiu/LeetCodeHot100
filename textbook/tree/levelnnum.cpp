@@ -1,6 +1,7 @@
 #include <string>
 #include <iostream>
 #include <queue>
+#include <algorithm>
 using namespace std;
 struct Node
 {
@@ -57,4 +58,43 @@ int levelnum(Node *root, int n)
     }
 
     return 0;
+}
+int levelmaxnum(int root[], int size)
+{
+    // 我们有一个数组,需要找它的宽
+    // 维护一个最大宽,一个队列
+    queue<int> qu;
+    int cur, rchild, lchild;
+    int m = 0;
+    int qsize = 0;
+    if (root == nullptr || size <= 0)
+    {
+        return 0;
+    }
+    if (root[1] == 0)
+    {
+        return 0;
+    }
+    qu.push(1);
+    while (!qu.empty())
+    {
+        qsize = qu.size();
+        m = max(m, qsize);
+        // 更新最大值
+        for (int i = 0; i < qsize; i++)
+        {
+            cur = qu.front(); // 取出第一个索引
+            lchild = cur * 2;
+            rchild = lchild + 1;
+            if (lchild < size && root[lchild] != 0)
+            {
+                qu.push(lchild);
+            }
+            if (rchild < size && root[rchild] != 0)
+            {
+                qu.push(rchild);
+            }
+        }
+    }
+    return m;
 }

@@ -5,6 +5,10 @@
 using namespace std;
 void TopSort(AdjGraph *G) // 拓扑排序
 {
+    // 这里一直变化的元素是每个节点入度，用一个数组indegree存储，
+    // 其次对于入度为0的元素，我们需要依次把它们取用，可以用栈或者队列存储，
+    // 每次处理一个节点，就要把它指向节点的入度减一，这个节点的入度为0了，那就要给它入栈/队列，
+    // 取出下一个元素，继续处理，反复处理上面的操作.
     stack<int> stk;
     int indegree[MAXV];
     for (int i = 0; i < G->n; i++)

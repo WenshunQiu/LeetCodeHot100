@@ -12,11 +12,12 @@ int main()
     int n;
     while (scanf("%d", &n) == 1)
     {
+        // 边界检查
         if (n == 0)
         {
             break;
         }
-
+        // 初始化图像
         for (int i = 1; i <= n; i++)
         {
             for (int j = 1; j <= n; j++)
@@ -24,7 +25,7 @@ int main()
                 dista[i][j] = (i == j ? 0 : INF);
             }
         }
-
+        // 写入图像
         for (int i = 1; i <= n; i++)
         {
             int m;
@@ -39,7 +40,7 @@ int main()
                 }
             }
         }
-
+        // Floyd算法
         for (int k = 1; k <= n; k++)
         {
             for (int i = 1; i <= n; i++)
@@ -62,7 +63,7 @@ int main()
                 }
             }
         }
-
+        // 找到最小就可以了
         int bestPerson = -1;
         int bestTime = INF;
 

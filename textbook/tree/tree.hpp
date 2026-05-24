@@ -28,3 +28,9 @@ typedef struct node
     struct node *rchild;
 
 } TBTNode; // 线索二叉树
+// 并查集,Union-Find Set Tree
+typedef struct UFSTree
+{
+    int rank;
+    int parent;
+} UFSTree;

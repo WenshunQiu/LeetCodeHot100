@@ -11,6 +11,8 @@ struct TreeNode
 };
 
 // 判断是否为完全二叉树
+// 完全二叉树：除了最后一层，其他层都是满的；并且最后一层的元素全部靠左
+// 思路，逐层遍历，遇到空之后后面只能为空
 bool isCompleteTree(TreeNode *root)
 {
     if (root == nullptr)

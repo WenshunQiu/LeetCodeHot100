@@ -3,16 +3,15 @@
 #include "tree.hpp"
 using namespace std;
 
-
 HTNode *creatHTNode(HTNode ht[], int n0) // ht前n0个元素是叶子节点，n0到n0*2 - 1 个元素是节点
 // 构建哈夫曼树，首先先初始化，再维护两个权值最小的节点的weight min1,min2和指针lnode rnode,找到后再在n0位置新建节点，并建立父母指向关系
 {
     int k, lnode, rnode;
     double min1, min2;
-    for (int i = 0; i < 2 * n0 - 1; i++)
+    for (int i = 0; i < 2 * n0 - 1; i++) // 一定要进行初始化，有时候编译器为了方便会把结构放到有数据的内存上面！
     {
         ht[i].parent = ht[i].lchild = ht[i].rchild = -1;
-    } // 初始化
+    }
     for (int i = n0; i < 2 * n0 - 1; i++)
     {
         min1 = min2 = 32767; // 储存两个权值最小节点的weight
@@ -80,4 +79,3 @@ void CreatHCode(HTNode ht[], HCode hcd[], int n0) // 哈夫曼编码从后面构
         hcd[i] = hc;
     }
 }
-

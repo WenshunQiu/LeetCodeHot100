@@ -10,22 +10,23 @@ struct Node
     Node *left, *right;
     Node(int x) : num(x), left(nullptr), right(nullptr) {}
 };
-
+// 输出第n层的节点数量，n从1开始
 int levelnum(Node *root, int n)
 {
-    if (root == nullptr)
-    {
-        return 0;
+    { // 边界检查
+        if (root == nullptr)
+        {
+            return 0;
+        }
+        if (n < 1)
+        {
+            return 0;
+        }
+        if (n == 1)
+        {
+            return 1;
+        }
     }
-    if (n < 1)
-    {
-        return 0;
-    }
-    if (n == 1)
-    {
-        return 1;
-    }
-
     queue<Node *> q;
     q.push(root);
     int depth = 1;

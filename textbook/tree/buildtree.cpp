@@ -11,7 +11,7 @@ using namespace std;
 
 BTNode *CreateBT1(char *pre, char *in, int n) // n 为二叉树的节点个数
 {
-    // 思路：从前序中获取到中间节点，然后在中序中分割为左右节点来递归
+    // 思路：从前序中获取到中间节点，然后在中序中分割为左右节点来递归，本质是只处理中间节点
     BTNode *b;
     char *p; // 指向分割的节点位置
     int k;
@@ -21,7 +21,7 @@ BTNode *CreateBT1(char *pre, char *in, int n) // n 为二叉树的节点个数
     }
     b = (BTNode *)malloc(sizeof(BTNode));
     b->data = *pre;
-    for (p = in; p < in + n; p++) // 找到分割节点的位置，但是这里为什么是n?
+    for (p = in; p < in + n; p++) // 找到分割节点的位置
     {
         if (*p == *pre)
         {

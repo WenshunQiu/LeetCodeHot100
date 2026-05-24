@@ -1,104 +1,39 @@
-﻿#include <cstdio>
-
-const int MAXN = 105;
-const int INF = 1000000000;
-
-int dista[MAXN][MAXN];
-
-int main()
+#include "graph.hpp"
+#include <iostream>
+void Prim(MatGraph g, int v)
 {
-    freopen("in.txt", "r", stdin);
-
-    int n;
-    while (scanf("%d", &n) == 1)
+    int lowcost[MAXV];
+    int mindest;
+    int closest[MAXV];
+    int k;
+    // 目的：对于每一次构建的树，找到它的最短临边，并确定它是由哪个点构成的临边；
+    for (int i = 0; i < g.n; i++)
     {
-        if (n == 0)
-        {
-            break;
-        }
-
-        for (int i = 1; i <= n; i++)
-        {
-            for (int j = 1; j <= n; j++)
-            {
-                dista[i][j] = (i == j ? 0 : INF);
-            }
-        }
-
-        for (int i = 1; i <= n; i++)
-        {
-            int m;
-            scanf("%d", &m);
-            for (int k = 0; k < m; k++)
-            {
-                int to, w;
-                scanf("%d %d", &to, &w);
-                if (w < dista[i][to])
-                {
-                    dista[i][to] = w;
-                }
-            }
-        }
-
-        for (int k = 1; k <= n; k++)
-        {
-            for (int i = 1; i <= n; i++)
-            {
-                if (dista[i][k] == INF)
-                {
-                    continue;
-                }
-                for (int j = 1; j <= n; j++)
-                {
-                    if (dista[k][j] == INF)
-                    {
-                        continue;
-                    }
-                    int cand = dista[i][k] + dista[k][j];
-                    if (cand < dista[i][j])
-                    {
-                        dista[i][j] = cand;
-                    }
-                }
-            }
-        }
-
-        int bestPerson = -1;
-        int bestTime = INF;
-
-        for (int i = 1; i <= n; i++)
-        {
-            int farthest = 0;
-            bool ok = true;
-            for (int j = 1; j <= n; j++)
-            {
-                if (dista[i][j] == INF)
-                {
-                    ok = false;
-                    break;
-                }
-                if (dista[i][j] > farthest)
-                {
-                    farthest = dista[i][j];
-                }
-            }
-
-            if (ok && farthest < bestTime)
-            {
-                bestTime = farthest;
-                bestPerson = i;
-            }
-        }
-
-        if (bestPerson == -1)
-        {
-            printf("disjoint\n");
-        }
-        else
-        {
-            printf("%d %d\n", bestPerson, bestTime);
-        }
+        lowcost[i] = g.edges[v][i];
+        closest[i] = v;
     }
 
-    return 0;
+    for (int i = 0; i < g.n; i++)
+    {
+        mindest = INF;
+        for (int j = 0; j < g.n; j++)
+        {
+            if (lowcost[j] != 0 && lowcost[j] < mindest)
+            {
+                mindest = lowcost[j];
+                k = j; // 标记最短的那条边
+            }
+        }
+    }
+    printf("(%d,%d):%d", closest[k], k, mindest); // 这里连接顺序是从根连接到叶子节点
+    lowcost[k] = 0;                               // 表示这个点已经被连接了
+    // 连接了新的节点，变化的应该是新节点连接状态，更新最小的即可
+    for (int j = 0; j < g.n; j++)
+    {
+        if (lowcost[j] != 0 && g.edges[k][j] < lowcost[j])
+        {
+            lowcost[j] = g.edges[k][j];
+            closest[j] = k;
+        }
+    }
 }

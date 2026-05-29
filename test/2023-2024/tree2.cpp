@@ -41,7 +41,7 @@ void oncePrint(BTNode *node)
     }
 }
 
-void HTravserse(BTNode *root)
+void HTravserse(BTNode *root) // ans:EBFACIHJKGD。
 {
     if (root == nullptr)
         return;
@@ -57,8 +57,8 @@ void HTravserse(BTNode *root)
     while (!stk.empty())
     {
         BTNode *cur = stk.top();
-        int st = state.top();
-        int forestFlag = inForest.top();
+        int st = state.top();            // 回溯输出标记，用来标记是否第二次访问，入栈和出栈解耦
+        int forestFlag = inForest.top(); // 右子树标记，即标记是否是森林的元素
 
         if (st == 0)
         {
@@ -83,14 +83,16 @@ void HTravserse(BTNode *root)
                 stk.push(restForest);
                 state.push(0);
                 inForest.push(1);
-            }
+            } //(6)   在遍历二叉树的过程中，遇到左子树为空，而右子树不空的结点，
+            // 要同时输出该结点及其父结点（如连续输出E、B）。（5分）
             continue;
         }
 
         stk.pop();
         state.pop();
         inForest.pop();
-
+        //(7)   在遍历二叉树的过程中，一旦对一个结点进行退栈操作，意味着要连续对一系列的结点进行退栈操作。
+        // 条件包括右子树为空或者右子树已经处理完毕，或者左子树已经处理完毕且右子树为空。（5分）
         if (forestFlag == 1 && cur->rchild != nullptr)
         {
             stk.push(cur->rchild);

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <climits>
+#include <cstdio>
 using namespace std;
 
 typedef struct MatGraph
@@ -25,8 +26,7 @@ long long prim(MatGraph *G, int root)
                 u = j;
             }
         }
-        if (u == -1) return -1; // å›¾ä¸è¿é€š
-
+        if (u == -1) return -1; // Í¼²»Á¬Í¨
         vis[u] = 1;
         cost += mn;
 

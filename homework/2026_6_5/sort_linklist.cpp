@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 typedef struct linkNode
 {
     int data;
@@ -30,7 +31,6 @@ void makeLinkedList(linkNode *&head)
         temp = temp->next;
     }
     head = _head;
-    return;
 }
 void merge(linkNode *&head, int low, int mid, int high)
 {
@@ -55,6 +55,8 @@ void merge(linkNode *&head, int low, int mid, int high)
     {
         highP = highP->next;
     }
+    linkNode *oldSegmentHead = lowP;
+    linkNode *after = highP->next;
     int j = mid + 1;
     while (low <= mid && j <= high)
     {
@@ -87,12 +89,19 @@ void merge(linkNode *&head, int low, int mid, int high)
         midP = midP->next;
         j++;
     }
-    store->next = highP->next;
+    store->next = after;
     if (oldlow == 0)
         head = storeHead->next;
     else
         start->next = storeHead->next;
-    // 还没有内存处理呢
+
+    while (oldSegmentHead != after)
+    {
+        linkNode *next = oldSegmentHead->next;
+        delete oldSegmentHead;
+        oldSegmentHead = next;
+    }
+    delete storeHead;
 }
 void mergeSortDC(linkNode *&head, int low, int high)
 {
@@ -132,7 +141,7 @@ void printLinkedList(linkNode *head)
 int main()
 {
     linkNode *head;
-    makeLinkedList(head); // 创建链表
+    makeLinkedList(head);
     int len = linkedListLenth(head);
     if (len == -1)
     {

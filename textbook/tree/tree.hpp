@@ -19,6 +19,7 @@ typedef struct BTNode
     char data;
     BTNode *lchild;
     BTNode *rchild;
+    BTNode(char a) : data(a), lchild(nullptr), rchild(nullptr) {}
 } BTNode; // 树的节点
 typedef struct node
 {

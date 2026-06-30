@@ -11,6 +11,8 @@ struct BTNode
     BTNode *rchild;
     BTNode(int a) : data{a}, rchild{nullptr}, lchild{nullptr} {}
 };
+// 二叉树的序列化与反序列化
+// 这里用string存储变量很聪明
 
 void serialize(BTNode *root, string &str, int isFirst)
 {
@@ -23,9 +25,9 @@ void serialize(BTNode *root, string &str, int isFirst)
     serialize(root->lchild, str, 0);
     serialize(root->rchild, str, 0);
     if (isFirst)
-    {
-        // str.pop_back();
-        // str.pop_back();
+    { // 是否要去除最后的,
+      //  str.pop_back();
+      //  str.pop_back();
     }
 }
 BTNode *_deserialize(const vector<string> &data, int &idx)

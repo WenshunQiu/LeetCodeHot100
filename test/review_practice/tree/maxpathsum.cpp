@@ -3,7 +3,7 @@
 using namespace std;
 
 int maxpathsum = 0;
-
+//最大路径和，求解从一个顶点开始的最长路径
 int calpathsum(BTNode *root)
 {
     if (root == nullptr)

@@ -3,7 +3,7 @@
 #include <algorithm>
 #include "textbook/tree/tree.hpp"
 using namespace std;
-
+// 这里求的是树的最大宽度，通过下标差来求的
 int maxWidth(BTNode *root)
 {
     if (root == nullptr)

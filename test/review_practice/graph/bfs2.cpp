@@ -63,7 +63,7 @@ int main()
             if ((i == 0 || i == 1) && to == '-')
                 continue;
             if ((i == 2 || i == 3) && to == '|')
-                continue
+                continue;
 
             dist[nx][ny] = dist[cur.x][cur.y] + 1;
             pre[nx][ny] = cur;//存储这个点从哪里来的

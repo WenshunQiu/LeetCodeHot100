@@ -63,6 +63,7 @@ int main()
             if (grid[nx][ny] == '*')
                 continue;
 
+            // 既要判断能不能出去，也要判断能不能进来
             // 判断当前格子能否按该方向走出去
             char from = grid[cur.x][cur.y];
             if ((i == 0 || i == 1) && from == '-')

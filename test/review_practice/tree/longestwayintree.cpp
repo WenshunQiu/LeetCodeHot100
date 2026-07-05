@@ -3,6 +3,7 @@
 #include "textbook/tree/tree.hpp"
 using namespace std;
 int ans = 0;
+
 int depth(BTNode *root)
 {
     if (root == nullptr)

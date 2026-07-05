@@ -27,6 +27,7 @@ double getDist(const Island &a, const Island &b)
 // u: 当前节点
 // parent: 父节点，防止走回头路
 // curTime: 从主岛到当前岛路径上的最大边长
+// 这个dfs递归有没有很像
 void dfsTime(int u, int parent, double curTime,
              const vector<vector<pair<int, double>>> &tree,
              const vector<Island> &islands,
@@ -41,8 +42,9 @@ void dfsTime(int u, int parent, double curTime,
         if (v == parent)
             continue;
 
-        // 所有光缆同时铺设
+        // 所有光缆同时铺设，真就所有的光缆一起铺设而不是从头铺到尾啊
         // 所以接入时间取路径上的最大边长，而不是边权和
+        // 由于dfs搜索的特性，我们只需要关注一条路就可以了
         dfsTime(v, u, max(curTime, w), tree, islands, weightedSum);
     }
 }
@@ -102,6 +104,7 @@ int main()
             }
         }
     }
+    // 使用距离来建立最小树
 
     // 根据 parent 数组建出最小生成树
     vector<vector<pair<int, double>>> tree(n);
